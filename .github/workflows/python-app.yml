@@ -46,4 +46,4 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: ghcr.io/ALEXISOON/docker:1.0.0
+        tags: ghcr.io/ALEXISOON/alexisdev:1.0.0
