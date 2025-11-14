@@ -18,12 +18,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
         python-version: "3.10"
-
     - name: Install dependencies
       run: pip install -r requirements.txt
 
@@ -40,13 +38,13 @@ jobs:
         push: true
         tags: ghcr.io/byronmoreno/finalquintoc:3.0.0
 
-    - name: 🧾 Mostrar variables básicas
+    - name: 🧾 Mostrar variables básicas (solo locales, no secretos)
       run: |
         echo "Probando conexión SSH con:"
         echo "Host: ${{ secrets.VPS_HOST }}"
         echo "Usuario: ${{ secrets.VPS_USER }}"
         echo "Puerto: ${{ secrets.VPS_SSH_PORT }}"
-
+    
     - name: 🧪 Probar conexión SSH
       uses: appleboy/ssh-action@v1
       with:
@@ -59,20 +57,7 @@ jobs:
           hostname
           whoami
           uptime
-
-    - name: 🔍 Verificar stack.yml
-      run: |
-        echo "Mostrando archivos en el directorio actual"
-        ls -la
-        echo "Verificando que stack.yml exista"
-        if [ -f stack.yml ]; then
-          echo "✅ stack.yml encontrado"
-        else
-          echo "❌ stack.yml NO encontrado, el workflow fallará"
-          exit 1
-        fi
-
-    - name: Copiar stack.yml al VPS (SCP)
+    - name: Copiar stack.yml to VPS (SCP)
       uses: appleboy/scp-action@v1
       with:
         host: ${{ secrets.VPS_HOST }}
