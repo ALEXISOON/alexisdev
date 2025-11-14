@@ -45,5 +45,7 @@ jobs:
     - name: 🏗️ Build and push Docker image
       uses: docker/build-push-action@v6
       with:
+        context: ./Desktop/alex
+        file: ./Desktop/alex/Dockerfile
         push: true
         tags: ghcr.io/alexisoon/alexisdev:1.0.0
