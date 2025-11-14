@@ -69,7 +69,6 @@ jobs:
           hostname
           whoami
           uptime
-
     - name: Copiar stack.yml to VPS (SCP)
       uses: appleboy/scp-action@v1
       with:
